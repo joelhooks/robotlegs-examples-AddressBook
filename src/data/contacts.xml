@@ -1,0 +1,6 @@
+<contacts>
+	<contact id="1" name="Tariq Ahmed" phoneNumber="555-555-1111"/>
+	<contact id="2" name="John Bland" phoneNumber="555-555-1212"/>
+	<contact id="3" name="Dan Orlando" phoneNumber="555-555-1313"/>
+	<contact id="4" name="Joel Hooks" phoneNumber="555-555-1414"/>
+</contacts>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 width="100%" height="100%" enabled="{_viewEnabled}">
+	<fx:Script>
+		<![CDATA[
+			import org.robotlegs.examples.addressbook.events.ContactEvent;
+			import org.robotlegs.examples.addressbook.model.vo.Contact;
+			
+			import mx.collections.IList;
+			import mx.events.ListEvent;
+			
+			[Bindable]
+			public var dataProvider:IList;
+			
+			[Bindable]
+			private var _viewEnabled:Boolean = true;
+			
+			public function set viewEnabled(value:Boolean):void
+			{
+				_viewEnabled = value;
+				list.selectedItem = null;
+			}
+
+			protected function list_changeHandler(event:ListEvent):void
+			{
+				dispatchEvent(new ContactEvent(ContactEvent.SELECT, selected));
+			}
+			
+			public function selectContact(contact:Contact):void
+			{
+				list.selectedItem = contact;
+			}
+
+			protected function list_doubleClickHandler(event:MouseEvent):void
+			{
+				dispatchEvent(new ContactEvent(ContactEvent.EDIT, selected));
+			}
+			
+			protected function get selected():Contact
+			{
+				return list.selectedItem as Contact;
+			}
+
+		]]>
+	</fx:Script>
+	<mx:DataGrid id="list" width="100%" height="100%" 
+				 doubleClickEnabled="true" 
+				 dataProvider="{dataProvider}" 
+				 change="list_changeHandler(event)" 
+				 doubleClick="list_doubleClickHandler(event)">
+		<mx:columns>
+			<mx:DataGridColumn id="nameColumn" dataField="name" headerText="Name"/>
+			<mx:DataGridColumn id="phoneNumberColumn" dataField="phoneNumber" headerText="Phone Number"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Group>
