@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
                        xmlns:s="library://ns.adobe.com/flex/spark" 
-                       xmlns:mx="library://ns.adobe.com/flex/mx"			   
+                       xmlns:mx="library://ns.adobe.com/flex/mx" 			   
                        xmlns:addressbook="org.robotlegs.examples.addressbook.*"
-                       xmlns:view="org.robotlegs.examples.addressbook.view.*">
+                       xmlns:view="org.robotlegs.examples.addressbook.view.*" 
+                       showStatusBar="false" currentState="hideContactDetails"
+                       minHeight="600" maxHeight="600" height="600" minWidth="400"  
+                       width.hideContactDetails="400" width.showContactDetails="900" >
     <fx:Declarations>
         <addressbook:AddressBookContext contextView="{this}"/>
     </fx:Declarations> 
+    <fx:Script>
+        <![CDATA[
+            public static const SHOW_CONTACT_DETAILS:String = "showContactDetails";
+            public static const HIDE_CONTACT_DETAILS:String = "hideContactDetails";
+
+        ]]>
+    </fx:Script>
+    <s:states>
+        <s:State name="showContactDetails"/>
+        <s:State name="hideContactDetails"/>
+    </s:states>
     <s:layout>
-        <s:VerticalLayout/>
+        <s:VerticalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10"/>
     </s:layout>
     <view:ContactsToolbarView/>
-    <view:ContactsView/>
-    <view:EditContactView/>
+    <s:HGroup width="100%" height="100%">
+        <view:ContactsView width="380"/>
+        <view:ContactsTabNavigator 
+            id="contactsNavigator" 
+            visible.hideContactDetails="false" 
+            visible.showContactDetails="true" 
+            includeInLayout.hideContactDetails="false"
+            includeInLayout.showContactDetails="true"/>
+    </s:HGroup>
 </s:WindowedApplication>

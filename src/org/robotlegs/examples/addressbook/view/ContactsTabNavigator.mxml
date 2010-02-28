@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<code:SuperTabNavigator xmlns:fx="http://ns.adobe.com/mxml/2009" 
+                 xmlns:s="library://ns.adobe.com/flex/spark" 
+                 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:code="http://code.google.com/p/flexlib/" 
+                 change="changeHandler(event)" childRemove="childRemoveHandler(event)" popUpButtonPolicy="off">
+    <fx:Script>
+        <![CDATA[
+            import mx.collections.ArrayCollection;
+            import mx.containers.Form;
+            import mx.events.ChildExistenceChangedEvent;
+            import mx.events.IndexChangedEvent;
+            
+            import org.robotlegs.examples.addressbook.events.ContactEvent;
+            import org.robotlegs.examples.addressbook.model.vo.Contact;
+            import org.robotlegs.examples.addressbook.view.events.ContactTabNavigatorEvent;
+            
+            [Bindable]
+            protected var forms:ArrayCollection = new ArrayCollection();
+            
+            public function openContactForm(contact:Contact):void
+            {
+                if(!contact)
+                    return;
+                var form:ContactForm = formForContact(contact);
+                if(form)
+                    selectedChild = form;
+                else
+                    createFormForContact(contact);
+            }
+            
+            public function removeContact(contact:Contact):void
+            {
+                var form:ContactForm = formForContact(contact);
+                if(form)
+                {
+                    removeChild(form);                   
+                }
+            }
+            
+            protected function formForContact(contact:Contact):ContactForm
+            {
+                var form:ContactForm;
+                for each(form in forms)
+                {
+                    if(form.contact == contact && contains(form))
+                    {
+                        return form;
+                    }
+                }    
+                
+                return null;
+            }
+
+            protected function changeHandler(event:IndexChangedEvent):void
+            {
+                var selectedForm:ContactForm = selectedChild as ContactForm;
+                dispatchEvent(new ContactEvent(ContactEvent.SELECT, selectedForm.contact));
+            }
+
+            protected function childRemoveHandler(event:ChildExistenceChangedEvent):void
+            {
+                var removedForm:ContactForm = event.relatedObject as ContactForm;
+                var formIndex:int = forms.getItemIndex(removedForm);
+                var selectedForm:ContactForm;
+                forms.removeItemAt(formIndex);
+                
+                if(removedForm.contact.id == 0)
+                    dispatchEvent(new ContactEvent(ContactEvent.CANCEL_CREATE));
+                
+                if(forms.length==0)
+                    dispatchEvent(new ContactTabNavigatorEvent(ContactTabNavigatorEvent.ALL_TABS_CLOSED));
+            }
+
+            protected function createFormForContact(contact:Contact):ContactForm
+            {
+                var form:ContactForm = new ContactForm();
+                form.contact = contact;
+                forms.addItem(form);
+                addChild(form);
+                selectedChild = form;
+                return form;
+            }
+
+        ]]>
+    </fx:Script>
+</code:SuperTabNavigator>

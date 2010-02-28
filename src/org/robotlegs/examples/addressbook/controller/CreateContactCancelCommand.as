@@ -15,7 +15,7 @@ package org.robotlegs.examples.addressbook.controller
 		
 		override public function execute():void
 		{
-			model.remove(model.editing);
+			model.remove(model.selected);
 		}
 	}
 }

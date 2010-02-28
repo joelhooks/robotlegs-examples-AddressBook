@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+         xmlns:s="library://ns.adobe.com/flex/spark" 
+         xmlns:mx="library://ns.adobe.com/flex/mx"
+         xmlns:vo="org.robotlegs.examples.addressbook.model.vo.*"
+         width="100%" height="100%"
+         label="{contact.id > 0 ? contact.firstName + ' ' + contact.lastName : 'New Contact'}"  
+         creationComplete="creationCompleteHandler(event)">
+    <fx:Declarations>
+        <mx:Validator id="firstNameValidator" required="true" source="{firstName}" property="text"/>
+        <mx:Validator id="lastNameValidator" required="true" source="{lastName}" property="text"/>
+        <vo:Contact id="editedContact" firstName="{firstName.text}" lastName="{lastName.text}" address="{address.text}" city="{city.text}"
+                     email="{email.text}" state="{state.text}" zip="{zip.text}" phone="{phone.text}"/>
+    </fx:Declarations>
+    <fx:Script>
+        <![CDATA[
+            import mx.events.FlexEvent;
+            
+            import org.robotlegs.examples.addressbook.events.ContactEvent;
+            import org.robotlegs.examples.addressbook.model.vo.Contact;
+            
+            protected var validators:Array;
+            
+            protected var _contact:Contact;
+            
+            public function get contact():Contact
+            {
+                return _contact;
+            }
+            
+            [Bindable]
+            public function set contact(value:Contact):void
+            {
+                _contact = value;
+            }
+
+            protected function creationCompleteHandler(event:FlexEvent):void
+            {
+                validators = [firstNameValidator, lastNameValidator];
+            }
+            
+            import flash.events.MouseEvent;
+            
+            protected function saveAndClose_clickHandler(event:MouseEvent):void
+            {
+                if(Validator.validateAll(validators).length > 0)
+                    return;
+                _contact.update(editedContact);
+                dispatchEvent(new ContactEvent(ContactEvent.UPDATE, contact));
+            }
+            
+            protected function delete_clickHandler(event:MouseEvent):void
+            {
+                dispatchEvent(new ContactEvent(ContactEvent.DELETE, contact));
+            }
+        ]]>
+    </fx:Script>
+    
+    <mx:Form width="100%" height="100%">
+        <mx:FormItem label="Id">
+            <mx:TextInput id="contactId" text="{contact.id}" enabled="false" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="First Name" required="true">
+            <mx:TextInput id="firstName" text="{contact.firstName}" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="Last Name" required="true">
+            <mx:TextInput id="lastName" text="{contact.lastName}" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="Address">
+            <mx:TextInput id="address" text="{contact.address}" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="City">
+            <mx:TextInput id="city" text="{contact.city}" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="State">
+            <mx:TextInput id="state" text="{contact.state}" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="Zip">
+            <mx:TextInput id="zip" text="{contact.zip}" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="Phone">
+            <mx:TextInput id="phone" text="{contact.phone}" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="Email">
+            <mx:TextInput id="email" text="{contact.email}" width="200"/>
+        </mx:FormItem>
+    </mx:Form>	
+    <s:HGroup bottom="10" right="10">
+        <s:Button id="delete" label="Delete" click="delete_clickHandler(event)"/>
+        <s:Button id="saveAndClose" label="Save and Close" click="saveAndClose_clickHandler(event)"/>
+    </s:HGroup>
+</mx:Canvas>

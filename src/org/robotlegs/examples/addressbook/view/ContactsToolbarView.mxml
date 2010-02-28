@@ -4,7 +4,7 @@
 		  xmlns:mx="library://ns.adobe.com/flex/mx" 
 		  width="100%" 
 		  paddingLeft="15" paddingRight="15" paddingBottom="5" paddingTop="5" 
-		  verticalAlign="middle" enabled="{!editing}">
+		  verticalAlign="middle">
 	<fx:Script>
 		<![CDATA[
 			import org.robotlegs.examples.addressbook.events.ContactEvent;
@@ -13,20 +13,6 @@
 			[Bindable]
 			public var selected:Contact;
 			
-			[Bindable]
-			public var editing:Contact;
-
-			protected function removeContact_clickHandler(event:MouseEvent):void
-			{
-				dispatchEvent(new ContactEvent(ContactEvent.DELETE, selected));
-			}
-
-
-			protected function editContact_clickHandler(event:MouseEvent):void
-			{
-				dispatchEvent(new ContactEvent(ContactEvent.EDIT, selected));
-			}
-
 
 			protected function createContact_clickHandler(event:MouseEvent):void
 			{
@@ -35,10 +21,13 @@
 
 		]]>
 	</fx:Script>
-	<s:Button id="createContact" label="New Contact" click="createContact_clickHandler(event)"/>
+    <s:Group>
+        <mx:Canvas backgroundColor="#006699" width="36" height="36" verticalCenter="0"/>
+        <s:Label text="in" fontSize="24" color="#FFFFFF" x="7" verticalCenter="0"/>
+        <s:Label text="Sync" styleName="appTitle" x="38" verticalCenter="0"/>
+
+    </s:Group>
 	<mx:Spacer width="100%"/>
-	<s:HGroup enabled="{selected}">
-		<s:Button id="removeContact" label="Delete Selected" click="removeContact_clickHandler(event)"/>
-		<s:Button id="editContact" label="Edit Selected" click="editContact_clickHandler(event)"/>
-	</s:HGroup>
+    <mx:Button icon="@Embed('assets/icon_plus.png')" width="32" height="32" toolTip="Add Contact" click="createContact_clickHandler(event)"/>
+    <mx:Button icon="@Embed('assets/bug.png')" width="32" height="32" toolTip="Describe"/>
 </s:HGroup>

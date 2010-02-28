@@ -13,8 +13,14 @@ package org.robotlegs.examples.addressbook.service.helpers
 			{
 				var contact:Contact = new Contact();
 				contact.id = contactXML.@id;
-				contact.name = contactXML.@name;
-				contact.phoneNumber = contactXML.@phoneNumber;
+				contact.firstName = contactXML.@firstName;
+                contact.lastName = contactXML.@lastName
+				contact.phone = contactXML.@phone;
+                contact.email = contactXML.@email;
+                contact.address = contactXML.@address;
+                contact.city = contactXML.@city;
+                contact.state = contactXML.@state;
+                contact.zip = contactXML.@zip;
 				contacts.addItem(contact);
 			}
 			return contacts;

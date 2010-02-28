@@ -1,0 +1,18 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+.iconClose {
+    skin: Embed("assets/icon_close16.png");
+    over-skin: Embed("assets/icon_close_over16.png");
+}
+
+s|.iconMinimize {
+    skin: Embed("assets/icon_minimize16.png");
+    over-skin: Embed("assets/icon_minimize_over16.png");
+}
+.iconMaximize {
+    skin: Embed("assets/icon_maximize16.png");
+    over-skin: Embed("assets/icon_maximize_over16.png");
+}
+

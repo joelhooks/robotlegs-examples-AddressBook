@@ -2,14 +2,16 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" 
-		 width="100%" height="100%" enabled="{_viewEnabled}">
+		 width="100%" height="100%" enabled="{_viewEnabled}" >
 	<fx:Script>
 		<![CDATA[
-			import org.robotlegs.examples.addressbook.events.ContactEvent;
-			import org.robotlegs.examples.addressbook.model.vo.Contact;
-			
-			import mx.collections.IList;
-			import mx.events.ListEvent;
+            import flash.events.MouseEvent;
+            
+            import mx.collections.IList;
+            import mx.events.ListEvent;
+            
+            import org.robotlegs.examples.addressbook.events.ContactEvent;
+            import org.robotlegs.examples.addressbook.model.vo.Contact;
 			
 			[Bindable]
 			public var dataProvider:IList;
@@ -35,13 +37,15 @@
 
 			protected function list_doubleClickHandler(event:MouseEvent):void
 			{
-				dispatchEvent(new ContactEvent(ContactEvent.EDIT, selected));
+				dispatchEvent(new ContactEvent(ContactEvent.SELECT, selected));
 			}
 			
 			protected function get selected():Contact
 			{
 				return list.selectedItem as Contact;
 			}
+
+
 
 		]]>
 	</fx:Script>
@@ -50,9 +54,10 @@
 				 dataProvider="{dataProvider}" 
 				 change="list_changeHandler(event)" 
 				 doubleClick="list_doubleClickHandler(event)">
-		<mx:columns>
-			<mx:DataGridColumn id="nameColumn" dataField="name" headerText="Name"/>
-			<mx:DataGridColumn id="phoneNumberColumn" dataField="phoneNumber" headerText="Phone Number"/>
-		</mx:columns>
+        <mx:columns>
+            <mx:DataGridColumn dataField="firstName" headerText="First Name"/>
+            <mx:DataGridColumn dataField="lastName" headerText="Last Name"/>
+            <mx:DataGridColumn dataField="phone" headerText="Phone"/>
+        </mx:columns>
 	</mx:DataGrid>
 </s:Group>

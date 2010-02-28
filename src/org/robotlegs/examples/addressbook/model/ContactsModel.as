@@ -35,24 +35,11 @@ package org.robotlegs.examples.addressbook.model
 			_selected = value;
 			dispatch(new ContactsModelEvent(ContactsModelEvent.SELECTED));
 		}
-
-		private var _editing:Contact;
-
-		public function get editing():Contact
-		{
-			return _editing;
-		}
-
-		public function set editing(value:Contact):void
-		{
-			_editing = value;
-			dispatch(new ContactsModelEvent(ContactsModelEvent.EDITING));
-		}
 		
 		public function create():Contact
 		{
 			var contact:Contact = new Contact();
-			editing = contact;
+			selected = contact;
 			dispatch(new ContactsModelEvent(ContactsModelEvent.CREATED));
 			return contact;
 		}
@@ -62,7 +49,6 @@ package org.robotlegs.examples.addressbook.model
 			var contactIndex:int = list.getItemIndex(contact);
 			if(contactIndex > -1) list.removeItemAt(contactIndex);
 			if(selected == contact) selected = null;
-			if(editing == contact) editing = null;;
 			dispatch(new ContactsModelEvent(ContactsModelEvent.REMOVED));
 		}
 	}

@@ -30,7 +30,6 @@ package org.robotlegs.examples.addressbook.service
 				model.list.addItem(contact);
 			if(contact.id == 0)
 				getNextId(contact);
-			model.editing = null;
 			dispatch(new ContactServiceEvent(ContactServiceEvent.SAVED));
 		}
 		

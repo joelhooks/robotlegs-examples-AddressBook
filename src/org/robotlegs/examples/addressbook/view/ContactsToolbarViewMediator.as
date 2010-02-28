@@ -17,7 +17,6 @@ package org.robotlegs.examples.addressbook.view
 		override public function onRegister():void
 		{
 			eventMap.mapListener(eventDispatcher, ContactsModelEvent.SELECTED, handleContactSelected);
-			eventMap.mapListener(eventDispatcher, ContactsModelEvent.EDITING, handleContactEditing);
 			
 			eventMap.mapListener(view, ContactEvent.EDIT, dispatch);
 			eventMap.mapListener(view, ContactEvent.DELETE, dispatch);
@@ -29,9 +28,5 @@ package org.robotlegs.examples.addressbook.view
 			view.selected = model.selected;
 		}
 		
-		protected function handleContactEditing(event:ContactsModelEvent):void
-		{
-			view.editing = model.editing;
-		}
 	}
 }
