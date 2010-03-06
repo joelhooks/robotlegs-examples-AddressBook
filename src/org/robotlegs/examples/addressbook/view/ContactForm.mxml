@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
          xmlns:s="library://ns.adobe.com/flex/spark" 
-         xmlns:mx="library://ns.adobe.com/flex/mx"
+         xmlns:mx="library://ns.adobe.com/flex/halo"
          xmlns:vo="org.robotlegs.examples.addressbook.model.vo.*"
          width="100%" height="100%"
-         label="{contact.id > 0 ? contact.firstName + ' ' + contact.lastName : 'New Contact'}"  
+         label="{contact.contactId > 0 ? contact.firstName + ' ' + contact.lastName : 'New Contact'}"  
          creationComplete="creationCompleteHandler(event)">
     <fx:Declarations>
         <mx:Validator id="firstNameValidator" required="true" source="{firstName}" property="text"/>
@@ -58,7 +58,7 @@
     
     <mx:Form width="100%" height="100%">
         <mx:FormItem label="Id">
-            <mx:TextInput id="contactId" text="{contact.id}" enabled="false" width="200"/>
+            <mx:TextInput id="contactId" text="{contact.contactId}" enabled="false" width="200"/>
         </mx:FormItem>
         <mx:FormItem label="First Name" required="true">
             <mx:TextInput id="firstName" text="{contact.firstName}" width="200"/>

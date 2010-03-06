@@ -28,7 +28,7 @@ package org.robotlegs.examples.addressbook.service
 		{
 			if(!model.list.contains(contact))
 				model.list.addItem(contact);
-			if(contact.id == 0)
+			if(contact.contactId == 0)
 				getNextId(contact);
 			dispatch(new ContactServiceEvent(ContactServiceEvent.SAVED));
 		}
@@ -38,10 +38,10 @@ package org.robotlegs.examples.addressbook.service
 			var id:int = 0;
 			for each(var contact:Contact in model.list)
 			{
-				if(contact.id > id)
-					id = contact.id;
+				if(contact.contactId > id)
+					id = contact.contactId;
 			}
-			forContact.id = id++;
+			forContact.contactId = id++;
 		}
 		
 		public function remove(contact:Contact):void

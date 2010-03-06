@@ -5,7 +5,7 @@ package org.robotlegs.examples.addressbook.model.vo
 	[Bindable]
 	public class Contact
 	{
-		public var id:int;
+		public var contactId:int;
         public var firstName:String;
         public var lastName:String;
         public var address:String;

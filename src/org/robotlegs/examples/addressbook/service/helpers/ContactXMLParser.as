@@ -12,7 +12,7 @@ package org.robotlegs.examples.addressbook.service.helpers
 			for each(var contactXML:XML in xml.contact)
 			{
 				var contact:Contact = new Contact();
-				contact.id = contactXML.@id;
+				contact.contactId = contactXML.@id;
 				contact.firstName = contactXML.@firstName;
                 contact.lastName = contactXML.@lastName
 				contact.phone = contactXML.@phone;

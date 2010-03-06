@@ -64,7 +64,7 @@
                 var selectedForm:ContactForm;
                 forms.removeItemAt(formIndex);
                 
-                if(removedForm.contact.id == 0)
+                if(removedForm.contact.contactId == 0)
                     dispatchEvent(new ContactEvent(ContactEvent.CANCEL_CREATE));
                 
                 if(forms.length==0)
