@@ -1,0 +1,22 @@
+INSERT INTO main.contacts
+(
+	firstName,
+	lastName,
+	address,
+	city,
+	state,
+	zip,
+	phone,
+	email
+)
+VALUES
+(
+	:firstName,
+	:lastName,
+	:address,
+	:city,
+	:state,
+	:zip,
+	:phone,
+	:email
+)
