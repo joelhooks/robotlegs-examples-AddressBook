@@ -8,7 +8,6 @@
                        minHeight="600" maxHeight="600" height="600" minWidth="400"  
                        width.hideContactDetails="400" width.showContactDetails="900" >
     <fx:Declarations>
-        <addressbook:AddressBookContext contextView="{this}"/>
     </fx:Declarations> 
     <fx:Script>
         <![CDATA[
