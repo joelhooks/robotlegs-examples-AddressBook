@@ -47,8 +47,6 @@
                     return;
                 _contact.update(editedContact);
                 dispatchEvent(new ContactEvent(ContactEvent.UPDATE, contact));
-                if(contact.contactId == 0)
-                    clearForm();
             }
             
             protected function delete_clickHandler(event:MouseEvent):void
@@ -56,11 +54,6 @@
                 dispatchEvent(new ContactEvent(ContactEvent.DELETE, contact));
             }
             
-            public function clearForm():void
-            {
-                contact = null;
-                
-            }
         ]]>
     </fx:Script>
     

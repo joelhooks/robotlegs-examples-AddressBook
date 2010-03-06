@@ -18,6 +18,7 @@ package org.robotlegs.examples.addressbook.model.vo
         
         public function update(contact:Contact):void
         {
+            contactId = contact.contactId;
             firstName = contact.firstName;
             lastName = contact.lastName;
             address = contact.address;

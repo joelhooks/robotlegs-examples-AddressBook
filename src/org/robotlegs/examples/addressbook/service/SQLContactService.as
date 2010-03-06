@@ -21,6 +21,8 @@ package org.robotlegs.examples.addressbook.service
 		
 		[Inject]
 		public var sqlRunner:SQLRunner;
+        
+        protected var newContact:Contact;
 		
 		public function load():void
 		{
@@ -58,6 +60,7 @@ package org.robotlegs.examples.addressbook.service
 			params["phone"] = contact.phone;
 			params["email"] = contact.email;
 			
+            newContact = contact;
 			
 			sqlRunner.executeModify(Vector.<QueuedStatement>([new QueuedStatement(ADD_CONTACT_SQL, params)]), addNew_result, database_error);
 		}
@@ -86,8 +89,10 @@ package org.robotlegs.examples.addressbook.service
 			if (result.data != null && result.data.length > 0)
 			{
 				var contact:Contact = result.data[0];
-				model.list.addItem(contact);
-				model.selected = contact;
+                newContact.update(contact)
+				model.list.addItem(newContact);
+				model.selected = newContact;
+                newContact = null;
 			}
 			dispatch(new ContactServiceEvent(ContactServiceEvent.SAVED));
 		}
