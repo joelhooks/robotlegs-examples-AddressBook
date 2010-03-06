@@ -1,7 +1,7 @@
 ﻿package org.robotlegs.examples.addressbook.controller.setup
 {
+	import org.robotlegs.base.ContextEvent;
 	import org.robotlegs.examples.addressbook.events.ApplicationConfigurationEvent;
-	import org.robotlegs.examples.addressbook.events.ContextEvent;
 	import org.robotlegs.mvcs.Command;
 	
 	public class StartupCommand extends Command
