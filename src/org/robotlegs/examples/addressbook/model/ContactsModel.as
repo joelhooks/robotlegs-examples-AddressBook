@@ -1,16 +1,20 @@
 package org.robotlegs.examples.addressbook.model
 {
+	import mx.collections.ArrayCollection;
+	
 	import org.robotlegs.examples.addressbook.events.ContactEvent;
 	import org.robotlegs.examples.addressbook.model.events.ContactsModelEvent;
 	import org.robotlegs.examples.addressbook.model.vo.Contact;
 	import org.robotlegs.examples.addressbook.service.events.ContactServiceEvent;
-	
-	import mx.collections.ArrayCollection;
-	
 	import org.robotlegs.mvcs.Actor;
 	
 	public class ContactsModel extends Actor
 	{
+        public function ContactsModel()
+        {
+            _list = new ArrayCollection();    
+        }
+        
 		private var _list:ArrayCollection;
 
 		public function get list():ArrayCollection

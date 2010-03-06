@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
          xmlns:s="library://ns.adobe.com/flex/spark" 
-         xmlns:mx="library://ns.adobe.com/flex/halo"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
          xmlns:vo="org.robotlegs.examples.addressbook.model.vo.*"
          width="100%" height="100%"
          label="{contact.contactId > 0 ? contact.firstName + ' ' + contact.lastName : 'New Contact'}"  
@@ -41,12 +41,14 @@
             
             import flash.events.MouseEvent;
             
-            protected function saveAndClose_clickHandler(event:MouseEvent):void
+            protected function save_clickHandler(event:MouseEvent):void
             {
                 if(Validator.validateAll(validators).length > 0)
                     return;
                 _contact.update(editedContact);
                 dispatchEvent(new ContactEvent(ContactEvent.UPDATE, contact));
+                if(contact.contactId == 0)
+                    parent.removeChild(this);
             }
             
             protected function delete_clickHandler(event:MouseEvent):void
@@ -87,6 +89,6 @@
     </mx:Form>	
     <s:HGroup bottom="10" right="10">
         <s:Button id="delete" label="Delete" click="delete_clickHandler(event)"/>
-        <s:Button id="saveAndClose" label="Save and Close" click="saveAndClose_clickHandler(event)"/>
+        <s:Button id="save" label="Save" click="save_clickHandler(event)"/>
     </s:HGroup>
 </mx:Canvas>

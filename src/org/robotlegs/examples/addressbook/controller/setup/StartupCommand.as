@@ -9,15 +9,15 @@
 		[Inject]
 		public var event:ContextEvent;
 		
-		public function StartupCommand()
-		{
-			super();
-		}
-		
-		
 		override public function execute():void
 		{
-			dispatch(new ApplicationConfigurationEvent(ApplicationConfigurationEvent.CONFIGURE_SERVICES));
+            commandMap.mapEvent(ApplicationConfigurationEvent.CONFIGURE_CONTROLLER, ConfigureControllerCommand);
+            commandMap.mapEvent(ApplicationConfigurationEvent.CONFIGURE_DATABASE, ConfigureDatabaseCommand);
+            commandMap.mapEvent(ApplicationConfigurationEvent.CONFIGURE_SERVICE, ConfigureServiceCommand);
+            commandMap.mapEvent(ApplicationConfigurationEvent.CONFIGURE_MODEL, ConfigureModelCommand);
+            commandMap.mapEvent(ApplicationConfigurationEvent.CONFIGURE_VIEW, ConfigureViewCommand);
+            
+			dispatch(new ApplicationConfigurationEvent(ApplicationConfigurationEvent.CONFIGURE_CONTROLLER));
 		}
 	}
 }

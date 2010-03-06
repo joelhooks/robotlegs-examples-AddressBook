@@ -35,8 +35,7 @@ package org.robotlegs.examples.addressbook.view
         
         protected function handleContactSelected(event:Event):void
         {
-			if (model.list.contains(model.selected))
-	            view.selectContact(model.selected);
+	        view.selectContact(model.selected);
         }
 		
 		protected function handleContactsLoaded(event:ContactServiceEvent):void
