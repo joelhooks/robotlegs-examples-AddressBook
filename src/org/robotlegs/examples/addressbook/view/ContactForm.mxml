@@ -48,12 +48,18 @@
                 _contact.update(editedContact);
                 dispatchEvent(new ContactEvent(ContactEvent.UPDATE, contact));
                 if(contact.contactId == 0)
-                    parent.removeChild(this);
+                    clearForm();
             }
             
             protected function delete_clickHandler(event:MouseEvent):void
             {
                 dispatchEvent(new ContactEvent(ContactEvent.DELETE, contact));
+            }
+            
+            public function clearForm():void
+            {
+                contact = null;
+                
             }
         ]]>
     </fx:Script>

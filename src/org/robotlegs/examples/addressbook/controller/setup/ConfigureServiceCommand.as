@@ -14,7 +14,7 @@ package org.robotlegs.examples.addressbook.controller.setup
 	
 	public class ConfigureServiceCommand extends Command
 	{
-		private static const DB_FILE_NAME:String = "AddressBook2.db";
+		private static const DB_FILE_NAME:String = "data/AddressBook.db";
 		
 		override public function execute():void
 		{
@@ -29,7 +29,7 @@ package org.robotlegs.examples.addressbook.controller.setup
         
         protected function configureSQLService():void
         {
-            var dbFile:File = File.applicationStorageDirectory.resolvePath(DB_FILE_NAME);
+            var dbFile:File = File.applicationDirectory.resolvePath(DB_FILE_NAME);
             var sqlRunner:SQLRunner = new SQLRunner(dbFile);
             
             injector.mapValue(SQLRunner, sqlRunner);

@@ -29,5 +29,4 @@
     </s:Group>
 	<mx:Spacer width="100%"/>
     <mx:Button icon="@Embed('assets/icon_plus.png')" width="32" height="32" toolTip="Add Contact" click="createContact_clickHandler(event)"/>
-    <mx:Button icon="@Embed('assets/bug.png')" width="32" height="32" toolTip="Describe"/>
 </s:HGroup>
